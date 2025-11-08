@@ -1,6 +1,0 @@
-module CalculatorApp {
-    interface Calculator {
-        double add(in double n1, in double n2);
-        double subtract(in double n1, in double n2);
-    };
-};
