@@ -28,8 +28,6 @@ This repository contains assignments for the Distributed Computing Systems cours
    java SearchClient
    ```
 
-**What it does:** Client can remotely call `add()` and `subtract()` methods on the server.
-
 ---
 
 ## Assignment 2: CORBA (Common Object Request Broker Architecture)
