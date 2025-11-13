@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Adder</title>
+</head>
+<body>
+
+    <h1>Addition Web Service</h1>
+    <p>This HTML page is served by Node.js. It will call the '/add' API on the same server.</p>
+
+    <!-- 1. The HTML form for user input -->
+    <form>
+        <label for="num1">First Number:</label>
+        <input type="number" id="num1" value="0">
+        
+        <label for="num2">Second Number:</label>
+        <input type="number" id="num2" value="0">
+        
+        <!-- This is a 'button' type so it doesn't refresh the page -->
+        <button type="button" id="calcButton">Add</button>
+    </form>
+
+    <!-- 2. The area to display the result -->
+    <h2>Result: <span id="result">...</span></h2>
+
+
+    <!-- 3. The JavaScript to connect the HTML to the server -->
+    <script>
+        // Get references to the HTML elements
+        const num1Input = document.getElementById('num1');
+        const num2Input = document.getElementById('num2');
+        const calcButton = document.getElementById('calcButton');
+        const resultSpan = document.getElementById('result');
+
+        // This function will be called when the button is clicked
+        async function calculateSum() {
+            // Get the current values from the input boxes
+            const num1 = num1Input.value;
+            const num2 = num2Input.value;
+
+            try {
+                // Use the 'fetch' API to call our Node.js server
+                // This makes a GET request to: /add?num1=VALUE1&num2=VALUE2
+                const response = await fetch(`/add?num1=${num1}&num2=${num2}`);
+                
+                // Parse the JSON response from the server
+                const data = await response.json();
+
+                // Update the result on the page
+                resultSpan.textContent = data.result;
+
+            } catch (error) {
+                // Handle any errors
+                resultSpan.textContent = 'Error!';
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Attach the calculateSum function to the button's click event
+        calcButton.addEventListener('click', calculateSum);
+    </script>
+
+</body>
+</html>
